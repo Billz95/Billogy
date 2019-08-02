@@ -1,0 +1,219 @@
+created: 20190802114011488
+modified: 20190802114124582
+tags: C++ School
+title: C++ Lecture
+type: text/vnd.tiddlywiki
+
+
+# Table of Contents
+
+# Tips
+
+-   try not to use the `namespace` which will import the entire namespace into
+    the file
+-   Using a reference is similar to a always dereferenced value, which has the
+    beneifit of passing by value
+    -   Reference can never be null, which avoid some of the mistakes
+
+
+<a id="org9581d38"></a>
+
+## Member list Init
+
+-   it allows each variable to be init only once (init with value), and
+    therefore become more efficient
+
+
+## class const function
+
+-   a const class can't call non-const function (as it will change the value)
+-   a non-const class can any public function
+
+
+# From lectures
+
+
+<a id="orgf62fa91"></a>
+
+## Benefits of `Const`
+
+-   clearer code
+    -   people will immediately know that your function is not changing anything
+    -   easier to reason about
+-   const will make anything within the variable itself also const
+-   easier for multithreading code
+
+
+<a id="orga358f0b"></a>
+
+## Problem with using `assert` directly
+
+-   when assert fails, it doesn't give much useful information for debugging
+    etc
+
+
+<a id="org4ef5fd4"></a>
+
+## Reference (kind of like a better version of pointers)
+
+
+<a id="orgb9467f4"></a>
+
+### Reference to `const`
+
+-   It will be referencing a object, however, it can't change the original
+    object
+-   const object can't be assigned to mutable references &#x2013; very handy
+
+
+<a id="orga493582"></a>
+
+## Class Templates
+
+-   not classes
+-   look like java generics, but it is not
+-   It is used to tell compiler to generate class
+-   `std::vector` is not a type, but `std::vector<int>` is a type
+
+
+<a id="orgf147684"></a>
+
+## Automatic type deduction 'auto'
+
+-   use it when it doesn't harm the readability
+-   it will make code more reusable
+
+
+<a id="org49b686a"></a>
+
+## const int\* const
+
+-   top level const on the right, and bottom const on the left
+-   top level const prevent from it pointing to other values
+-   bottom const prevent it from changing the value that it is pointing to
+
+
+<a id="org304046a"></a>
+
+## Function Overloading
+
+-   It actually take many steps for the function to be overloaded
+    1.  find all the candidates (same name)
+    2.  find all the possible ones (same #args and convertible types)
+    3.  find best-match
+-   Only use function overloading for the trivial cases, if non-trivial, name
+    them differently
+
+
+<a id="org35c5058"></a>
+
+## More const
+
+-   `function(const int val)` and `function(int val)` are redefinition because
+    it's going to give a copy anyway
+-   `function(const int& val)` and `function(int& val)` are not redefinition it
+    works as low-level definition
+
+
+<a id="orgd58f0dc"></a>
+
+## type casting
+
+-   in c++, we prefer to use `static_cast<int>(value)`
+-   with static cast, the intention is clearer
+-   c-style cast is a bit more generous than the c++ cast as it will cast at
+    compile time to make sure nothing goes wrong
+
+
+<a id="orgb5c67e5"></a>
+
+## Function template
+
+-   function template will actually let compiler to make a new function
+    declaration in the binary, rather than the runtime.
+-   They are essentially instruction for the compiler to do things
+
+
+<a id="org9829989"></a>
+
+## `Using` Keyword
+
+-   in C++, we use `using` to replace `typedef` that is normally used in C
+
+
+<a id="org31d9c1a"></a>
+
+## Iterators!
+
+-   iterator should not actually own anything, otherwise it's vulnerable to
+    memory leak
+
+
+<a id="org1c8b425"></a>
+
+## Smart pointers
+
+
+<a id="org40afc17"></a>
+
+### Weak ptr
+
+-   temporary ownership can be pretty useful when multithreading
+-   it returns null pointer when the object is not there anymore (gives
+    opportunity for observing)
+
+
+<a id="org6c7c62c"></a>
+
+# STL Library
+
+-   STL container only stores data, but has no idea how are they gonna be accessed
+-   STL algorihtms manipulates data without knowing how they are stored
+-   Container and algorithm communicate via ****iterators****
+
+
+<a id="org88ebb13"></a>
+
+## Iterators
+
+-   It's a better abstractoin from the pointers
+-   glue between container and algorithm
+-   `.end()` is normally empty
+-   `++iter` basically moves the iterator
+-   It can be used like pointers to be dereferenced
+
+
+<a id="org3a68e0a"></a>
+
+### Constant iterators
+
+-   use `cbegin` and `cend` to get constant iterator, such that modification
+    will be forbidden
+-   it can have optimisation for the code
+
+
+<a id="org872947e"></a>
+
+### Reversed Iterators
+
+-   use `rbegin` and `rend` to get reversed iterator (traverse in the other way around)
+
+
+<a id="orgd180dd3"></a>
+
+### Difference between input and forward iterator
+
+-   They are different in the number of times that they can be dereferenced.
+-   Input iterator can't be dereferenced for multiple times
+
+1.  std data types iterators
+
+    -   std::vector -> random access iterator
+    -   std::list -> bi-directional (double linked list)
+    -   std::forward<sub>list</sub> -> singly linked list
+
+
+<a id="org5b924ec"></a>
+
+### std::copy
+
